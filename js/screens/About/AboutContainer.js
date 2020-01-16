@@ -9,13 +9,14 @@ const QUERY_ABOUT = gql`
         allConducts {
             id
             title
-            description
+            
         }
     }
 `;
 
-function CodeofConduct() {
+const CodeofConduct = () => {
     const { loading, error, data } = useQuery(QUERY_ABOUT);
+    console.log(data.allConducts);
 
     if(loading) return <Text>Loading</Text>;
     if(error) return <Text>error</Text>;
@@ -23,5 +24,13 @@ function CodeofConduct() {
     return <About data = {data}/>; 
 };
 
+class AboutContainer extends Component {
+    render() {
+        return (
+            <CodeofConduct />
+        )
+    }
+}
 
-export default CodeofConduct;
+
+export default AboutContainer;
