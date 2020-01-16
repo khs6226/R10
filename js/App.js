@@ -1,37 +1,14 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
+import React, { Component } from 'react';
+import { ApolloProvider } from '@apollo/react-hooks';
+import client from './config/api';
+import About from '../js/screens/About';
 
-import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
-
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-const App: () => React$Node = () => {
+const App = () => {
   return (
-    
+    <ApolloProvider client={client}>
+      <About />
+    </ApolloProvider>
   )
 };
-
-const styles = StyleSheet.create({
-  
-});
 
 export default App;
