@@ -16,10 +16,11 @@ const QUERY_ABOUT = gql`
 
 const CodeofConduct = () => {
     const { loading, error, data } = useQuery(QUERY_ABOUT);
-    console.log(data.allConducts);
-
+    
     if(loading) return <Text>Loading</Text>;
     if(error) return <Text>error</Text>;
+    
+    console.log(data.allConducts);
 
     return <About data = {data}/>; 
 };
