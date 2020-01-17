@@ -1,17 +1,43 @@
 import React from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { View, Text } from 'react-native';
+import { gql } from 'apollo-boost';
+import { useQuery } from '@apollo/react-hooks';
 import CodeofConduct from '../../components/CodeofConduct';
 
-const About = ( {data} ) => {
-    return (
-        <ScrollView>
+const QUERY_ABOUT = gql`
+    query {
+        allConducts {
+            id
+            title
+            description
+        }
+    }
+`;
+
+
+const About = () => {
+    const { loading, error, data } = useQuery(QUERY_ABOUT);
+
+    if(loading) {
+        return (
+            <Text>Loading</Text>
+        )
+    } else if(error) {
+        return (
+            <Text>Error</Text>
+        )
+    } else {
+        return (
             <View>
-            {data.allConducts.map(data => {
-                <CodeofConduct key = {data.id} data = {data} />
-            })}
+                {data.allConducts.map(data => (
+                    <CodeofConduct key = {data.id}
+                                   title = {data.title}
+                                   description = {data.description} />
+                    ))}
             </View>
-        </ScrollView>
-    )
+        )
+    }
 }
+
 
 export default About;
