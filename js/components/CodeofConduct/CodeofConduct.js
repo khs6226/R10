@@ -1,17 +1,27 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 
-const CodeofConduct = ({title, description}) => {
-    return(
-        <View>
+class CodeofConduct extends Component {
+    constructor(props) {
+        super(props);
+    }
+    render() {
+        const data = this.props.data;
+        const title = data.title;
+        const desc = data.description;
+        console.log(title);
+
+        return (
+            <View>
             <View>
                 <Text>{title}</Text>
             </View>
             <View>
-                <Text>{description}</Text>
+                <Text>{desc}</Text>
             </View>
-        </View>
-    )
+            </View>
+        )
+    }
 }
 
 export default CodeofConduct;

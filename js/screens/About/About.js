@@ -31,8 +31,7 @@ const About = () => {
             <ScrollView>
                 {data.allConducts.map(data => (
                     <CodeofConduct key = {data.id}
-                                   title = {data.title}
-                                   description = {data.description} />
+                                   data = {data} />
                     ))}
             </ScrollView>
         )
