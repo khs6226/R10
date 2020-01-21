@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 import CodeofConduct from '../../components/CodeofConduct';
@@ -28,13 +28,13 @@ const About = () => {
         )
     } else {
         return (
-            <View>
+            <ScrollView>
                 {data.allConducts.map(data => (
                     <CodeofConduct key = {data.id}
                                    title = {data.title}
                                    description = {data.description} />
                     ))}
-            </View>
+            </ScrollView>
         )
     }
 }
