@@ -30,9 +30,29 @@ const About = () => {
     } else {
         return (
             <ScrollView>
-                <Image 
-                    style = {styles.logo}
-                    source = {require('../../../assets/images/r10_logo.png')}/>
+                <Image style = {styles.logo}
+                       source = {require('../../../assets/images/r10_logo.png')}
+                />
+                <View>
+                    <Text>
+                        R10 is a conference that focuses on just about any topic related to dev.
+                    </Text>
+                </View>
+                <View>
+                    <Text style = {styles.header}>
+                        Date & Venue
+                    </Text>
+                </View>
+                <View>
+                    <Text>
+                        The R10 conference will take place on Tuesday, June 27, 2017 in Vancouver, BC.
+                    </Text>
+                </View>
+                <View>
+                    <Text style = {styles.header}>
+                        Code of Conduct
+                    </Text>
+                </View>
                 {data.allConducts.map(data => (
                     <CodeofConduct key = {data.id}
                                    data = {data} />
