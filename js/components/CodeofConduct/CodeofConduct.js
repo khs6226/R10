@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Animated } from 'react-native';
 import styles from './styles';
 
 class CodeofConduct extends Component {
@@ -7,11 +7,22 @@ class CodeofConduct extends Component {
         super(props);
         
         this.state = {
-            hide : false
+            hide : false,
+            signs: new Animated.Value(0)
         }
     }
 
     onPress = () => {
+        Animated.timing(this.state.signs, {
+            toValue: 1,
+            duration: 800
+        }).start(event => {
+            if(event.finished) {
+                this.setState({
+                    signs: new Animated.Value(0)
+                });
+            }
+        });
         this.setState({
             hide : !this.state.hide
         })
@@ -21,16 +32,25 @@ class CodeofConduct extends Component {
     render() {
         const data = this.props.data;
 
+        const interpolatedRotation = this.state.signs.interpolate({
+            inputRange: [0, 1],
+            outputRange: ['0deg', '360deg']
+        });
+        const spin = {
+            transform: [{
+                rotate: interpolatedRotation
+            }]
+        };
         return (
             <View>
-                <View>
-                    <TouchableOpacity onPress={this.onPress}>
-                        <Text style = {styles.conduct}>{this.state.hide ? "-" : "+"} {data.title}</Text>
-                    </TouchableOpacity>
-                </View>
-                <View>
+                <TouchableOpacity onPress={this.onPress}>
+                    <View>
+                        <Animated.Text style = {[styles.conduct, spin]}>{this.state.hide ? "-" : "+"}</Animated.Text> 
+                        <Text>{data.title}</Text>
+                    </View>
                     <Text>{this.state.hide ? data.description : null}</Text>
-                </View>
+
+                </TouchableOpacity>
             </View>
         )
     }
