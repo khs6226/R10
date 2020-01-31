@@ -28,6 +28,7 @@ const About = () => {
             <Text>Error</Text>
         )
     } else {
+        // console.log(data)
         return (
             <ScrollView style = {styles.container}>
                 <Image style = {styles.logo}

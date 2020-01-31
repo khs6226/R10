@@ -43,10 +43,12 @@ const TabBarNavigator = createBottomTabNavigator(
                 let iconName;
 
                 if (routeName === 'About') {
-                    iconName = 'ios-information-circle'
+                  iconName = 'ios-information-circle';
+                } else if(routeName === 'Schedule') {
+                  iconName = 'ios-calendar';
                 }
 
-                return <Icon name={iconName} size={25} color={tintColor}/>
+            return <Icon name={iconName} size={25} color={tintColor} />
             }
         }),
 
