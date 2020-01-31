@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
         height: 70,
         marginLeft: "auto",
         marginRight: "auto",
-        marginTop: 35,
+        marginTop: 50,
         marginBottom: 20
     },
     header : {

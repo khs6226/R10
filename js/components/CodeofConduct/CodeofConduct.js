@@ -44,11 +44,11 @@ class CodeofConduct extends Component {
         return (
             <View>
                 <TouchableOpacity onPress={this.onPress}>
-                    <View>
-                        <Animated.Text style = {[styles.conduct, spin]}>{this.state.hide ? "-" : "+"}</Animated.Text> 
-                        <Text>{data.title}</Text>
+                    <View style = {styles.container}>
+                        <Animated.Text style = {[styles.sign, spin]}>{this.state.hide ? "-" : "+"}</Animated.Text> 
+                        <Text style = {styles.title}>{data.title}</Text>
                     </View>
-                    <Text>{this.state.hide ? data.description : null}</Text>
+                    <Text style = {styles.conduct}>{this.state.hide ? data.description : null}</Text>
 
                 </TouchableOpacity>
             </View>

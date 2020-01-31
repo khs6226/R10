@@ -29,12 +29,12 @@ const About = () => {
         )
     } else {
         return (
-            <ScrollView>
+            <ScrollView style = {styles.container}>
                 <Image style = {styles.logo}
                        source = {require('../../../assets/images/r10_logo.png')}
                 />
                 <View>
-                    <Text>
+                    <Text style = {styles.text}>
                         R10 is a conference that focuses on just about any topic related to dev.
                     </Text>
                 </View>
@@ -44,7 +44,7 @@ const About = () => {
                     </Text>
                 </View>
                 <View>
-                    <Text>
+                    <Text style = {styles.text}>
                         The R10 conference will take place on Tuesday, June 27, 2017 in Vancouver, BC.
                     </Text>
                 </View>
