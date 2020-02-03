@@ -1,32 +1,37 @@
 import { StyleSheet } from 'react-native'
-import { fonts } from '../../config/styles'
+import { fonts, colors } from '../../config/styles'
 
 const styles = StyleSheet.create({
-    logo : {
-        width: 300,
-        height: 70,
-        marginLeft: "auto",
-        marginRight: "auto",
-        marginTop: 50,
-        marginBottom: 20
-    },
-    header : {
-        fontSize: 30,
+    title : {
+        fontSize: 20,
         fontFamily: fonts.light,
         fontWeight: "bold",
-        marginBottom: 20
+        marginTop: 10
+    },
+    header : {
+        fontSize: 17,
+        fontFamily: fonts.light,
+        fontWeight: "bold",
+        padding: 20,
+        paddingTop: 10,
+        paddingBottom: 10,
+        backgroundColor: colors.lightGrey
     },
     container : {
         marginLeft: 15,
         marginRight: 15
     },
-    text : {
+    locationContainer : {
+        flexDirection: "row",
+        justifyContent: "space-between"
+    },
+    location : {
+        fontSize: 17,
         fontFamily: fonts.light,
-        fontSize: 18,
-        fontWeight: "300",
-        lineHeight: 25,
-        marginBottom: 20
-    }
+        fontWeight: "bold",
+        color: colors.mediumGrey,
+        marginVertical: 10
+    },
 
 })
 
