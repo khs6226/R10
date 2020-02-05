@@ -1,9 +1,9 @@
 import React, { createContext, useState, useEffect } from 'react';
-import AsyncStorage, { useAsyncStorage } from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const FavesContext = createContext();
 
-const FavesProvider = () => {
+const FavesProvider = ({children, ...props}) => {
     const [faves, setValue] = useState([]);
 
     const declare = async () => {
@@ -37,8 +37,11 @@ const FavesProvider = () => {
         declare()
       }, []);
 
-    return [faves, writeItemToStorage];
-
+    return (
+        <FavesContext.Provider value={{ faves, writeItemToStorage }} {...props}>
+            {children}
+        </FavesContext.Provider>
+    )
 }
 export {FavesContext};
 export default FavesProvider;

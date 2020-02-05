@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
+import React, {useContext} from 'react';
 import { View, Text, SectionList, TouchableOpacity } from 'react-native';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 import styles from './style'
-import { withNavigation } from 'react-navigation';
-import { FavesContext } from '../../context/FavesContext/FavesContext';
+import { withNavigation, NavigationEvents } from 'react-navigation';
+import {FavesContext} from '../../context/FavesContext/FavesContext';
 import sortStartTime from '../../lib/sortStartTime';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -19,9 +19,9 @@ const QUERY_SCHEDULE = gql`
     }
 `;
 
-const Schedule = ({ navigation }) => {
+const Faves = ({ navigation }) => {
     const { loading, error, data } = useQuery(QUERY_SCHEDULE);
-    const { faves, writeItemToStorage } = useContext(FavesContext);
+    const {faves, writeItemToStorage} = useContext(FavesContext);
 
     if (loading) {
         return (
@@ -35,7 +35,7 @@ const Schedule = ({ navigation }) => {
         return (
             <View>
                 <SectionList
-                    sections={data.allSessions.reduce(sortStartTime, [])}
+                    sections={data.allSessions.filter(data => faves.includes(data.id)).reduce(sortStartTime, [])}
                     keyExtractor={data => data.id}
                     renderItem={({ item }) => (
                         <View style={styles.container}>
@@ -63,4 +63,4 @@ const Schedule = ({ navigation }) => {
 }
 
 
-export default withNavigation(Schedule);
+export default withNavigation(Faves);
