@@ -69,7 +69,7 @@ const DrawerNavigator = createDrawerNavigator(
             return <Icon name={iconName} size={25} color={tintColor} />
             },
         }),
-
+        
         contentOptions: {
             activeTintColor: colors.purple,
             inactiveTintColor: colors.mediumGrey,
@@ -78,7 +78,7 @@ const DrawerNavigator = createDrawerNavigator(
                 fontFamily: fonts.light,
                 fontSize: 20,
                 fontWeight: "bold",
-            
+                
             },
         }
     }

@@ -40,11 +40,16 @@ const styles = StyleSheet.create({
     },
     speakerName : {
         fontFamily: fonts.light,
-        fontSize: 30
+        fontSize: 30,
+        alignSelf: "center"
     },
     speakerBio : {
         fontFamily: fonts.light,
-        fontSize: 20
+        fontSize: 20,
+        alignSelf: "center",
+        marginHorizontal: 15,
+        marginTop: 20,
+        lineHeight: 30
     },
     image : {
         width: 70,
@@ -90,7 +95,9 @@ const styles = StyleSheet.create({
         marginVertical: 10
     },
     modalContainer : {
-        backgroundColor: colors.black
+        backgroundColor: colors.black,
+        height: "100%",
+
     },
     modalTopContainer : {
         flexDirection: "row",
@@ -101,24 +108,32 @@ const styles = StyleSheet.create({
     },
     modalScrollView : {
         width: "90%",
+        height: "90%",
+
         alignSelf: "center",
         backgroundColor: colors.white,
         borderRadius: 20
     },
     modalX : {
-        fontFamily: fonts.light,
-        fontSize: 22,
-        color: colors.white
+        color: colors.white,
+        alignContent: "flex-end",
+        marginLeft: 20,
+        marginRight: 50
     },
     modalText : {
         fontFamily: fonts.light,
         fontSize: 22,
+        fontWeight: "bold",
+        textAlign: "justify",
+        marginLeft: 20,
         color: colors.white,
     },
     modalImage : {
-        width: 150,
-        height: 150,
-        borderRadius: 100
+        width: 130,
+        height: 130,
+        borderRadius: 100,
+        alignSelf: "center",
+        marginVertical: 20
     }
 })
 

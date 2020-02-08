@@ -30,8 +30,8 @@ const Drawer = ({navigation}) => {
 export const sharedNavigationOptions = navigation => ({
     headerBackTitle: null,
     header: props => <GradientHeader {...props} />,
-    headerLeft: () => Platform.select({
-      android: <Drawer navigation={navigation} />
+    ...Platform.select({
+      android: { headerLeft: () => <Drawer navigation={navigation} />}
     }),
     headerStyle: {
       backgroundColor: "transparent",

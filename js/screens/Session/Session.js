@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { View, Text, Image, TouchableOpacity, Modal, ScrollView } from 'react-native';
+import { View, Text, Image, TouchableOpacity, Modal, ScrollView, Platform, Linking } from 'react-native';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 import styles from './style';
@@ -40,7 +40,11 @@ const Session = ({ navigation }) => {
     const { faves, writeItemToStorage } = useContext(FavesContext);
     const { data, loading, error } = getSessionById(navigation.getParam('id'));
     const [modalOpen, setModalOpen] = useState(false);
-    const toggleModal = () => { setModalOpen(!modalOpen) }
+    const toggleModal = () => { setModalOpen(!modalOpen) };
+    const closeButton = Platform.select({
+        ios: "ios-close",
+        android: "md-close"
+    });
     
     if (loading) {
         return (
@@ -80,9 +84,7 @@ const Session = ({ navigation }) => {
                 <Modal animationType="slide" transparent={false} visible={modalOpen}>
                     <View style={styles.modalContainer}>
                         <View style={styles.modalTopContainer}>
-                            <TouchableOpacity onPress={() => toggleModal()}>
-                                <Text style={styles.modalX}>X</Text>
-                            </TouchableOpacity>
+                            <Icon name={closeButton} size={50} style={styles.modalX} onPress={() => toggleModal()}/>
                             <Text style={styles.modalText}>About the Speaker</Text>
                         </View>
                         {data.speaker ?
@@ -92,7 +94,7 @@ const Session = ({ navigation }) => {
                                 <Text style={styles.speakerBio}>{data.speaker.bio}</Text>
                                 {data.speaker.url ?
                                 <View style={styles.faveButtonContainer}>
-                                    <TouchableOpacity style={styles.faveButton}>
+                                    <TouchableOpacity style={styles.faveButton} onPress={() => Linking.openURL(data.speaker.url)}>
                                         <Text style={styles.faves}>
                                             Read More on Wikipedia
                                         </Text>
