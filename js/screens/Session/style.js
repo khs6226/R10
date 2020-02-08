@@ -38,6 +38,14 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center"
     },
+    speakerName : {
+        fontFamily: fonts.light,
+        fontSize: 30
+    },
+    speakerBio : {
+        fontFamily: fonts.light,
+        fontSize: 20
+    },
     image : {
         width: 70,
         height: 70,
@@ -50,14 +58,15 @@ const styles = StyleSheet.create({
         marginLeft: 15,
     },
     faveButtonContainer : {
-        alignItems: "center"
+        alignItems: "center",
+        marginTop: 30
     },
     faveButton : {
         borderRadius: 40,
         alignItems: "center",
         width: "75%",
         backgroundColor: colors.purple,
-        paddingVertical: 20
+        paddingVertical: 15
     },
     faves : {
         fontFamily: fonts.light,
@@ -80,7 +89,37 @@ const styles = StyleSheet.create({
         color: colors.mediumGrey,
         marginVertical: 10
     },
-
+    modalContainer : {
+        backgroundColor: colors.black
+    },
+    modalTopContainer : {
+        flexDirection: "row",
+        alignItems: "center",
+        marginTop: 30,
+        marginBottom: 30,
+        backgroundColor: colors.black,
+    },
+    modalScrollView : {
+        width: "90%",
+        alignSelf: "center",
+        backgroundColor: colors.white,
+        borderRadius: 20
+    },
+    modalX : {
+        fontFamily: fonts.light,
+        fontSize: 22,
+        color: colors.white
+    },
+    modalText : {
+        fontFamily: fonts.light,
+        fontSize: 22,
+        color: colors.white,
+    },
+    modalImage : {
+        width: 150,
+        height: 150,
+        borderRadius: 100
+    }
 })
 
 export default styles

@@ -1,11 +1,10 @@
-import React, {useContext} from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import React, { useContext, useState } from 'react';
+import { View, Text, Image, TouchableOpacity, Modal, ScrollView } from 'react-native';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 import styles from './style';
 import { colors } from '../../config/styles';
-import { withNavigation } from 'react-navigation';
-import {FavesContext} from '../../context/FavesContext/FavesContext';
+import { FavesContext } from '../../context/FavesContext/FavesContext';
 import changeTimeFormat from '../../lib/changeTimeFormat';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -38,9 +37,11 @@ const getSessionById = id => {
 }
 
 const Session = ({ navigation }) => {
-    const {faves, writeItemToStorage} = useContext(FavesContext);
+    const { faves, writeItemToStorage } = useContext(FavesContext);
     const { data, loading, error } = getSessionById(navigation.getParam('id'));
-
+    const [modalOpen, setModalOpen] = useState(false);
+    const toggleModal = () => { setModalOpen(!modalOpen) }
+    
     if (loading) {
         return (
             <Text>Loading</Text>
@@ -57,7 +58,7 @@ const Session = ({ navigation }) => {
                         {data.location}
                     </Text>
                     {faves && faves.includes(data.id) ? (
-                        <Icon name="ios-heart" size={20} color="red" />
+                        <Icon name="ios-heart" size={20} color={colors.red} />
                     ) : null}
                 </View>
                 <Text style={styles.title}>
@@ -70,10 +71,39 @@ const Session = ({ navigation }) => {
                     {data.description}
                 </Text>
                 {data.speaker ? <Text style={styles.presenter}>Presented by: </Text> : null}
-                <View style={styles.speakerContainer}>
-                    {data.speaker ? <Image style={styles.image} source={{ uri: data.speaker.image }} /> : null}
-                    {data.speaker ? <Text style={styles.name}>{data.speaker.name}</Text> : null}
-                </View>
+                <TouchableOpacity onPress={() => toggleModal()}>
+                    <View style={styles.speakerContainer}>
+                        {data.speaker ? <Image style={styles.image} source={{ uri: data.speaker.image }} /> : null}
+                        {data.speaker ? <Text style={styles.name}>{data.speaker.name}</Text> : null}
+                    </View>
+                </TouchableOpacity>
+                <Modal animationType="slide" transparent={false} visible={modalOpen}>
+                    <View style={styles.modalContainer}>
+                        <View style={styles.modalTopContainer}>
+                            <TouchableOpacity onPress={() => toggleModal()}>
+                                <Text style={styles.modalX}>X</Text>
+                            </TouchableOpacity>
+                            <Text style={styles.modalText}>About the Speaker</Text>
+                        </View>
+                        {data.speaker ?
+                            <ScrollView style={styles.modalScrollView}>
+                                <Image style={styles.modalImage} source={{ uri: data.speaker.image }} />
+                                <Text style={styles.speakerName}>{data.speaker.name}</Text>
+                                <Text style={styles.speakerBio}>{data.speaker.bio}</Text>
+                                {data.speaker.url ?
+                                <View style={styles.faveButtonContainer}>
+                                    <TouchableOpacity style={styles.faveButton}>
+                                        <Text style={styles.faves}>
+                                            Read More on Wikipedia
+                                        </Text>
+                                    </TouchableOpacity>
+                                </View>
+                                 : null}
+                            </ScrollView>
+                            : null
+                        }
+                    </View>
+                </Modal>
                 <View style={styles.faveButtonContainer}>
                     <TouchableOpacity style={styles.faveButton} onPress={() => writeItemToStorage(data.id)}>
                         <Text style={styles.faves}>
